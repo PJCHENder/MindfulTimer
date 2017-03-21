@@ -29,7 +29,7 @@ const minToMiniSec = (minutes) => minutes * 60 * 1000
 //  currentDateTime: object，當前時間日期資訊
 //  currentTime: 當前時間
 //
-let clocking
+let timer
 let history = []
 let currentTime           //  當前時間（字串）
 let currentDateTime       //  取的當前時間（日期物件）
@@ -55,7 +55,7 @@ const showDuration = () => {
   document.title = msToTime(restTimeMiniSec)      //  將毫秒轉為分秒，並顯示於網頁 title 上
 
   if (restTimeMiniSec < 1) {
-    clearInterval(clocking)
+    clearInterval(timer)
     logCurrentTime()
     alert("Time'up")
   }
@@ -63,14 +63,20 @@ const showDuration = () => {
 
 //  按下按鈕開始計時
 $('#clocking').on('click', function () {
+  //  如果 Timer 已經計時中，則先重設
+  if(timer) {
+    clearInterval(timer)
+  }
   startTimeStamp = Date.now()
   durationTime = minToMiniSec($('#set_time').val())
   stopTimeStamp = startTimeStamp + durationTime
-  clocking = setInterval(showDuration, 1000)
+  timer = setInterval(showDuration, 1000)
 })
 
 //  按下重設
 $('#reset').on('click', function () {
-  clearInterval(clocking)
+  clearInterval(timer)
   $('#set_time').val(' ')
+  $('#show').html(' ')
+  document.title = 'simpleClock'
 })
