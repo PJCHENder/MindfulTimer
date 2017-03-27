@@ -42,7 +42,8 @@ let restTimeMiniSec       //  計算剩餘的時間（毫秒）
 //  logCurrentTime: function，紀錄完成時間，並顯示於頁面上
 const logCurrentTime = () => {
   currentDateTime = new Date()
-  currentTime = `${padLeft(currentDateTime.getHours(), 2)}:${padLeft(currentDateTime.getMinutes(), 2)}:${padLeft(currentDateTime.getSeconds(), 2)}`
+  let task = $('#set_task').val() || '未設定'
+  currentTime = `${padLeft(currentDateTime.getHours(), 2)}:${padLeft(currentDateTime.getMinutes(), 2)}:${padLeft(currentDateTime.getSeconds(), 2)} => ${task}`
   history.push(currentTime)
   $('#log').html(history.join('<br>'))
 }
@@ -54,23 +55,42 @@ const showDuration = () => {
   $('#show').html(msToTime(restTimeMiniSec))      //  將毫秒轉回分秒，並顯示於網頁上
   document.title = msToTime(restTimeMiniSec)      //  將毫秒轉為分秒，並顯示於網頁 title 上
 
-  if (restTimeMiniSec < 1) {
+  if (restTimeMiniSec < 100) {
     clearInterval(timer)
     logCurrentTime()
+    stopCSS()
     alert("Time'up")
   }
+}
+
+//  按下開始計時候動畫的轉換
+const clockingCSS = function () {
+  $('.set_time, .set_task, #clocking').fadeOut(function () {
+    $('.task').fadeIn(function () {
+      $(this).find('h4').text($('#set_task').val() || '你並未設定任何任務')
+    })
+  })
+}
+
+//  計時器停止時的畫面
+const stopCSS = function () {
+  $('.task').fadeOut(function () {
+    $('.set_time, .set_task, #clocking').fadeIn()
+  })
 }
 
 //  按下按鈕開始計時
 $('#clocking').on('click', function () {
   //  如果 Timer 已經計時中，則先重設
-  if(timer) {
+  if (timer) {
     clearInterval(timer)
   }
   startTimeStamp = Date.now()
   durationTime = minToMiniSec($('#set_time').val())
   stopTimeStamp = startTimeStamp + durationTime
   timer = setInterval(showDuration, 1000)
+
+  clockingCSS()
 })
 
 //  按下重設
@@ -78,5 +98,6 @@ $('#reset').on('click', function () {
   clearInterval(timer)
   $('#set_time').val(' ')
   $('#show').html(' ')
-  document.title = 'simpleClock'
+  document.title = 'Mindful Clock'
+  stopCSS()
 })
