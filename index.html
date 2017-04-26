@@ -24,7 +24,11 @@
     }
     
     .alert {
-        min-height: 56px;
+        position: fixed;
+        top: 10px;
+        right: 50px;
+        z-index: 5;
+        display: none;
     }
     
     .task {
@@ -35,6 +39,12 @@
 </head>
 
 <body>
+
+    <div class="col-3 alert alert-success text-center" role="alert">
+      Saved Successfully
+    </div>
+
+
     <div class="container">
         <div class="set_task form-group row no-gutters">
             <label for="set_task" class="col-4 col-form-label">寫下任務</label>

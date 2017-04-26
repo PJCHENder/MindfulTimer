@@ -10483,5 +10483,9 @@ $(document).ready( function () {
 function saveNote () {
   window.localStorage.setItem('noteContent', $('#note').val())
   console.log('saveNote')
+  $(".alert").fadeIn('slow', function () {
+    $(".alert").fadeOut('slow')
+  })
 }
-$('#note').on('keyup', _.debounce(saveNote, 2000, {leading: true, trailing: true}))
+$('#note').on('keyup', _.debounce(saveNote, 1000, {leading: false, trailing: true}))
+
