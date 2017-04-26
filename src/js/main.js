@@ -101,3 +101,21 @@ $('#reset').on('click', function () {
   document.title = 'Mindful Clock'
   stopCSS()
 })
+
+//  載入 localStorage 的資料
+$(document).ready( function () {
+  try {
+    let noteContent = window.localStorage.getItem('noteContent')
+    $('#note').val(noteContent)
+    console.log('loadNote')
+  } catch (e) {
+    console.log('error', e.message)
+  }
+})
+
+//  將 note 的資料寫入 localStorage
+function saveNote () {
+  window.localStorage.setItem('noteContent', $('#note').val())
+  console.log('saveNote')
+}
+$('#note').on('keyup', _.debounce(saveNote, 2000, {leading: true, trailing: true}))

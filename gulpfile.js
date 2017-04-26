@@ -11,8 +11,8 @@ gulp.task('serve', ['sass'], function () {
     server: './'
   })
 
-  gulp.watch('src/sass/*.sass', ['sass'])
-  gulp.watch('src/js/*.js').on('change', browserSync.reload)
+  gulp.watch('src/sass/*.sass', ['sass']).on('change', browserSync.reload)
+  gulp.watch('src/js/*.js', ['concat-js']).on('change', browserSync.reload)
   gulp.watch('*.html').on('change', browserSync.reload)
 })
 
@@ -44,10 +44,10 @@ gulp.task('minify-css', function () {
 
 //  將不同的 js 檔案合併在同一支當中
 gulp.task('concat-js', function () {
-  return gulp.src(['vendor/jquery-3.1.1.js', 'vendor/tether.min.js', 'vendor/bootstrap.min.js', 'vendor/sweetalert2.min.js', 'src/js/*.js'])
+  return gulp.src(['vendor/jquery-3.1.1.js', 'vendor/tether.min.js', 'vendor/bootstrap.min.js', 'vendor/sweetalert2.min.js', 'vendor/lodash.min.js', 'src/js/*.js'])
         .pipe(concat('main.js'))
         .pipe(gulp.dest('./dist'))
 })
 
-gulp.task('default', ['serve'])
+gulp.task('default', ['sass', 'concat-js', 'serve'])
 gulp.task('build', ['sass', 'auto_prefix', 'minify-css', 'concat-js'])
