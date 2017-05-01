@@ -3,18 +3,24 @@
   background-color: #DDD;
   padding: 30px 50px;
   margin-top: 20px;
-  border-radius: 5px; }
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  }
 
 .card {
-  margin-top: 0.5em; }
+  margin-top: 0.5em;
+}
 
 .alert {
   position: fixed;
   top: 10px;
   right: 50px;
   z-index: 5;
-  display: none; }
+  display: none;
+}
 
 .task {
   display: none;
-  margin-bottom: 1em; }
+  margin-bottom: 1em;
+}
