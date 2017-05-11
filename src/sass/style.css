@@ -1,12 +1,49 @@
-.container {
-  width: 500px;
-  background-color: #DDD;
-  padding: 30px 50px;
-  margin-top: 20px;
-  border-radius: 5px; }
+html, body {
+  height: 100%; }
+
+body {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center; }
+
+.container-fluid {
+  background-color: #E8E8E8;
+  padding: 0px 35px;
+  display: -webkit-box;
+  display: flex;
+  border-radius: 5px;
+  justify-content: space-around;
+  width: 95%;
+  height: 95%; }
+
+.timer-panel {
+  width: 320px;
+  margin-top: 50px;
+  margin-right: 15px; }
+
+.note {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 15px; }
+  .note .form-control {
+    height: 100%; }
+  .note .copyright {
+    text-align: right;
+    color: #CCC;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    margin-bottom: 0; }
+    .note .copyright a {
+      color: #AAA; }
 
 .card {
-  margin-top: 0.5em; }
+  margin-top: 0.5em;
+  border: 1px solid #CCC; }
 
 .alert {
   position: fixed;
@@ -18,3 +55,7 @@
 .task {
   display: none;
   margin-bottom: 1em; }
+
+@media screen and (max-width: 480px) {
+  .note {
+    display: none; } }

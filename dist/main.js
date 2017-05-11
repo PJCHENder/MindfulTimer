@@ -10367,8 +10367,7 @@ var n=this.__index__>=this.__values__.length;return{done:n,value:n?F:this.__valu
 /* global $ _ */
 
 // 程式封裝
-!(function () {
-
+;(function () {
   /* 左邊補0 */
   function padLeft (str, len) {
     str = '' + str
@@ -10398,19 +10397,17 @@ var n=this.__index__>=this.__values__.length;return{done:n,value:n?F:this.__valu
   //  clocking: 儲存 setInterval
   //  history: array，用來紀錄歷史紀錄
   //  startTimeStamp: 開始時間的時間戳記
-  //  durationTime: 剩餘時間的毫秒數
-  //  currentDateTime: object，當前時間日期資訊
-  //  currentTime: 當前時間
+
 
   let timer
   let history = []
   let currentTime           //  當前時間（字串）
   let currentDateTime       //  取的當前時間（日期物件）
-  let startTimeStamp        //  取得滑鼠點下時的時間戳記（毫秒）
-  let durationTime          //  使用者輸入的時間（毫秒）
+  let startTimeStamp        //  取得開始任務時的時間戳記（毫秒）
+  let setRestTimeMs         //  使用者輸入的時間（毫秒）
   let stopTimeStamp         //  計算結束時的時間戳記（毫秒）
   let currentTimeStamp      //  取得當前的時間戳記（毫秒）
-  let restMs       //  計算剩餘的時間（毫秒）
+  let restMs                //  計算剩餘的時間（毫秒）
 
   //  logCurrentTime: function，紀錄完成時間，並顯示於頁面上
   function logCurrentTime () {
@@ -10459,8 +10456,8 @@ var n=this.__index__>=this.__values__.length;return{done:n,value:n?F:this.__valu
       clearInterval(timer)
     }
     startTimeStamp = Date.now()
-    durationTime = minToMs($('#set_time').val())
-    stopTimeStamp = startTimeStamp + durationTime
+    setRestTimeMs = minToMs($('#set_time').val())
+    stopTimeStamp = startTimeStamp + setRestTimeMs
     timer = setInterval(refreshRestTime, 1000)
 
     startClockingAnimation()
